@@ -401,6 +401,7 @@ h4 {
     border-bottom: 1px solid #ccc;
     align-items: center;
     transition: background 0.2s;
+    padding-left: 1rem;
 }
 
 .schedule-row:last-child {
@@ -771,7 +772,7 @@ footer {
 
     .hero {
         min-height: auto;
-        padding: 2rem 1rem;
+        /* padding: 2rem 1rem; */
     }
 
     .main-title {
@@ -832,34 +833,128 @@ footer {
         white-space: normal;
     }
 
-    .organizer-card {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #ccc;
-        flex: auto;
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 900px) {
+        body {
+            width: 100%;
+            margin: 0;
+            border: none;
+        }
+
+        /* Hero Stacking */
+        .atlas-hero {
+            flex-direction: column;
+            height: auto;
+            min-height: auto;
+        }
+
+        .hero-left-split,
+        .hero-right-split {
+            width: 100%;
+            border-right: none;
+            border-bottom: 2px solid var(--border-color);
+            min-height: 400px;
+        }
+
+        .main-col {
+            /* padding-left: 3rem; REMOVED to allow overlay */
+        }
+
+        .atlas-overlay {
+            top: 25%;
+            left: 52%;
+            width: 80%;
+        }
+
+        /* Participation Stacking */
+        .participation-container {
+            flex-direction: column;
+            padding-left: 0;
+            /* Container itself doesn't need padding */
+        }
+
+        .part-text {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .part-details {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            /* padding-left: 3.5rem; REMOVED to allow overlay */
+        }
+
+        /* Organizers 2 Cols */
+        .organizers-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .organizer-card {
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Enforce right border on odd items (overrides desktop 5n rule) */
+        .organizer-card:nth-child(odd) {
+            border-right: 1px solid #ccc;
+        }
+
+        /* Remove right border on even items */
+        .organizer-card:nth-child(2n) {
+            border-right: none;
+        }
+
+        /* Restore bottom border for items 6+ (overriding desktop rule) */
+        .organizer-card:nth-child(n+6) {
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Remove bottom border for last row (assuming 2 columns) */
+        .organizer-card:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        /* Labels: Remove overrides to keep them vertical.
+           Ensure container padding matches desktop or adapts 
+        */
+        .section-border {
+            /* padding-left: 3rem; REMOVED to allow overlay */
+        }
+
+        /* Tentative note: Keep matching desktop (vertical) */
+        .tentative-note {
+            /* Inherit desktop styles */
+        }
+
+        .schedule-list {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
-}
 
-@keyframes bounce-horizontal {
+    @keyframes bounce-horizontal {
 
-    0%,
-    100% {
-        transform: translateX(0);
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
     }
 
-    50% {
-        transform: translateX(5px);
-    }
-}
+    @keyframes bounce-vertical {
 
-@keyframes bounce-vertical {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
 
-    0%,
-    100% {
-        transform: translateY(0);
+        50% {
+            transform: translateY(5px);
+        }
     }
-
-    50% {
-        transform: translateY(5px);
-    }
-}
