@@ -1,0 +1,865 @@
+@font-face {
+    font-family: 'IM FELL Double Pica SC';
+    src: url('IM FELL Double Pica SC.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IM FELL English Roman';
+    src: url('IM FELL English Roman.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    background: #111;
+
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --border-color: #000000;
+    --light-gray: #f2f2f2;
+    --accent: #000;
+
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 3rem;
+
+    --font-heading: 'IM FELL English Roman', serif;
+    --font-body: 'IM FELL English Roman', serif;
+    --font-label: 'IM FELL Double Pica SC', serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--text-color);
+    background: var(--bg-color);
+    overflow-x: hidden;
+    /* border: 5px solid var(--border-color); */
+    /* Frame the whole page */
+    min-height: 100vh;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* REUSABLE CLASSES */
+.section-border {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    background: white;
+}
+
+.btn.primary {
+    background: var(--text-color);
+    color: white;
+    border-color: var(--text-color);
+}
+
+.btn.primary:hover {
+    opacity: 0.9;
+    text-decoration: none;
+}
+
+.btn.text-link {
+    border: none;
+    padding-left: 0;
+    background: transparent;
+}
+
+.btn.text-link:hover {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+
+/* HERO - TWO COLUMN */
+.atlas-hero {
+    padding: 0;
+    min-height: 80vh;
+    /* Allow it to grow */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: #fff;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Vertical Nav (Replaces Themes) */
+.vertical-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.block-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    font-family: var(--font-heading);
+    /* Use serif for nav links? Or Body? User said use fonts. */
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+.block-btn:hover {
+    background: #fafafa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.primary-btn {
+    background: var(--text-color);
+    color: white;
+    border-color: var(--text-color);
+}
+
+.primary-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.hero-left-split {
+    width: 45%;
+    /* Slightly smaller than half to respect portrait ratio */
+    border-right: 2px solid var(--border-color);
+    position: relative;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-right-split {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+}
+
+.atlas-container {
+    position: relative;
+    width: 100%;
+    /* Let image dictate height naturally within width constraint */
+}
+
+.atlas-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    /* Respect ratio */
+}
+
+
+/* .atlas-img cannot have ::before/::after as it is a replaced element. 
+   Use .atlas-container::after for overlays (already added). */
+
+.atlas-overlay {
+    position: absolute;
+    top: 25%;
+    /* Adjusted for natural image height */
+    left: 52%;
+    /* Slight tweak for "in ball" centering */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 70%;
+    z-index: 2;
+}
+
+.atlas-text-content {
+    /* If readability is an issue, add text-shadow */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.main-title.compact {
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    /* Slightly smaller clamping */
+    line-height: 1;
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.subtitle-small {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.meta-small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+}
+
+.hero-actions {
+    position: absolute;
+    bottom: 5%;
+    /* Relative to container */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 0.5rem;
+    width: max-content;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-credit {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    font-size: 0.55rem;
+    color: var(--text-color);
+    opacity: 0.4;
+    z-index: 5;
+    pointer-events: none;
+    font-family: var(--font-body);
+}
+
+/* Moved Content Styles */
+.hero-right-split .main-col {
+    padding: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Bottom align content */
+    position: relative;
+    /* Catch sticky label */
+}
+
+.hero-right-split .side-col {
+    padding: var(--spacing-md);
+    /* Less padding */
+    background: var(--light-gray);
+    flex: 0 auto;
+    /* Only take necessary height */
+}
+
+/* SPLIT LAYOUT (About & Themes) */
+.split-layout {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.problem-text {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+    max-width: 90%;
+}
+
+.solution-text {
+    font-size: 1.35rem;
+    /* Bigger text for solution */
+    line-height: 1.3;
+    color: #000;
+}
+
+.side-col {
+    flex: 1;
+    min-width: 250px;
+    background: var(--light-gray);
+    padding: var(--spacing-lg);
+}
+
+#organizers-grid {
+    border-bottom: none !important;
+}
+
+
+
+.intro {
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: var(--spacing-md);
+}
+
+.small-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: var(--spacing-md);
+    width: 80%;
+}
+
+.card {
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid #ccc;
+    padding-bottom: var(--spacing-sm);
+}
+
+.card:last-child {
+    border-bottom: none;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: #444;
+}
+
+/* COMMON SECTION STYLES */
+.section-border {
+    position: relative;
+    /* Catch the sticky label */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sticky-label {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    font-family: var(--font-label);
+    font-size: 0.9rem;
+    /* Larger for readability */
+    text-transform: uppercase;
+    color: #888;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* HORIZONTAL SCHEDULE */
+/* VERTICAL SCHEDULE TIMELINE */
+/* VERTICAL SCHEDULE TIMELINE */
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2.5rem;
+    /* Room for left label */
+    padding-right: 2.5rem;
+    /* Room for right label */
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+    /* Base z-index */
+}
+
+/* Tentative Note - Vertical Label on Right */
+.tentative-note {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: 0.5rem;
+    font-family: var(--font-label);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #888;
+    writing-mode: vertical-lr;
+    z-index: 100;
+    /* Force on top */
+    pointer-events: none;
+}
+
+.schedule-row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.schedule-row:hover {
+    background: #fafafa;
+}
+
+.time-col {
+    width: 140px;
+    /* Compact width */
+    padding: 0.8rem var(--spacing-md);
+    font-family: var(--font-body);
+    /* Inter */
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+    color: #444;
+    border-right: 1px solid #ccc;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.event-col {
+    padding: 0.8rem var(--spacing-md);
+    padding-left: var(--spacing-lg);
+    flex: 1;
+}
+
+.event-title {
+    display: block;
+    font-family: var(--font-heading);
+    /* Playfair Display */
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #000;
+    margin-bottom: 0.2rem;
+}
+
+.event-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    font-family: var(--font-body);
+}
+
+/* Special Rows */
+.schedule-row.break {
+    background: repeating-linear-gradient(45deg, #fdfdfd, #fdfdfd 10px, #f5f5f5 10px, #f5f5f5 20px);
+}
+
+.schedule-row.break .time-col {
+    color: #999;
+}
+
+.schedule-row.highlight {
+    background: #fff;
+}
+
+.schedule-row.highlight .event-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* COMPACT PANEL (Participation) */
+/* PARTICIPATION SECTION */
+/* PARTICIPATION SECTION */
+.participation-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    padding-left: 2.5rem;
+    /* Room for label */
+    align-items: stretch;
+    border-bottom: 1px solid var(--border-color);
+    /* Bottom border for container */
+}
+
+.part-text {
+    flex: 3;
+    min-width: 300px;
+    padding: var(--spacing-lg);
+    border-right: 2px solid var(--border-color);
+}
+
+.part-text .intro {
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+    color: #000;
+}
+
+.highlight-inline {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    border-left: 2px solid #000;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.part-details {
+    flex: 2;
+    min-width: 280px;
+    padding: var(--spacing-lg);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    /* Fix sticky label positioning */
+}
+
+.details-header {
+    margin-top: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #000;
+    /* Stronger header line */
+}
+
+.format-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.format-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.format-list li:last-child {
+    border-bottom: none;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.btn.full-width {
+    width: 100%;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn.secondary {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.btn.primary:hover {
+    background: #333;
+    border-color: #333;
+}
+
+.btn.secondary:hover {
+    background: #000;
+}
+
+.btn.primary:hover {
+    background: #333;
+    border-color: #333;
+}
+
+.btn.secondary:hover {
+    background: #f0f0f0;
+}
+
+/* ORGANIZERS GRID */
+/* Remove old section-header styles ... */
+
+.organizers-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    padding-left: 2.5rem;
+    /* Room for label */
+    background: #fff;
+    position: relative;
+    /* Anchor for feather mask */
+}
+
+/* Feather the hard left edge of borders/content */
+.organizers-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3.5rem;
+    /* Cover padding (2.5rem) + fade */
+    background: linear-gradient(to right, #fff 70%, transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Responsive: Break down on smaller screens */
+@media (max-width: 1200px) {
+    .organizers-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* LOGOS - Forced Size & Style */
+.logo-wrapper,
+.organizer-card img {
+    height: 25px !important;
+    /* Smaller */
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 0.8rem;
+    max-width: 100px;
+
+    /* Monochrome & Faded */
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+/* Restore on hover */
+.organizer-card:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* ORGANIZER CARD - Sizing */
+.organizer-card {
+    padding: var(--spacing-md);
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Remove bottom border for last row elements in 5-col grid (Desktop) */
+.organizer-card:nth-child(n+6) {
+    border-bottom: none;
+}
+
+.organizer-card h4 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.organizer-card .affiliation {
+    font-size: 0.8rem;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.organizer-card p {
+    font-size: 0.8rem;
+    /* Smaller Bio Text per request */
+    color: #444;
+    line-height: 1.4;
+    margin-top: auto;
+    /* Push to bottom if content varies? Or just flow */
+    margin-top: 0.5rem;
+}
+
+/* FOOTER */
+footer {
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: #111;
+    color: #aaa;
+    font-size: 0.8rem;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.footer-conference a {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: #555;
+}
+
+.footer-details {
+    color: #ccc;
+    font-size: 0.9rem;
+    background: #222;
+    padding: 1rem;
+    display: inline-block;
+    align-self: center;
+    border-radius: 4px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-links a {
+    color: #888;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-links .separator {
+    color: #444;
+}
+
+.copyright {
+    font-size: 0.7rem;
+    color: #444;
+    margin-top: 1rem;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    body {
+        border-width: 0;
+        border-top: 5px solid black;
+    }
+
+    .split-layout {
+        flex-direction: column;
+    }
+
+    .main-col {
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 2rem 1rem;
+    }
+
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .horizontal-schedule {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+
+    .schedule-label {
+        position: static;
+        writing-mode: horizontal-tb;
+        transform: none;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem;
+        min-height: auto;
+    }
+
+    .schedule-item {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        padding: 1rem;
+    }
+
+    .schedule-item .time {
+        width: 80px;
+        margin-bottom: 0;
+    }
+
+    .scroll-label {
+        min-height: auto;
+        writing-mode: horizontal-tb;
+        transform: none;
+        position: static;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .scroll-indicator {
+        transform: rotate(0deg) !important;
+        animation: bounce-vertical 1.5s infinite !important;
+    }
+
+    .horizontal-scroll-container {
+        flex-direction: column;
+        white-space: normal;
+    }
+
+    .organizer-card {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        flex: auto;
+    }
+}
+
+@keyframes bounce-horizontal {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes bounce-vertical {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
