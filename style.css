@@ -576,6 +576,14 @@ h4 {
     border: 1px solid #000;
 }
 
+.btn.disabled {
+    background: #ccc;
+    border-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .btn.primary:hover {
     background: #333;
     border-color: #333;
@@ -834,107 +842,6 @@ footer {
     }
 
 
-    /* MOBILE RESPONSIVE */
-    @media (max-width: 900px) {
-        body {
-            width: 100%;
-            margin: 0;
-            border: none;
-        }
-
-        /* Hero Stacking */
-        .atlas-hero {
-            flex-direction: column;
-            height: auto;
-            min-height: auto;
-        }
-
-        .hero-left-split,
-        .hero-right-split {
-            width: 100%;
-            border-right: none;
-            border-bottom: 2px solid var(--border-color);
-            min-height: 400px;
-        }
-
-        .main-col {
-            /* padding-left: 3rem; REMOVED to allow overlay */
-        }
-
-        .atlas-overlay {
-            top: 25%;
-            left: 52%;
-            width: 80%;
-        }
-
-        /* Participation Stacking */
-        .participation-container {
-            flex-direction: column;
-            padding-left: 0;
-            /* Container itself doesn't need padding */
-        }
-
-        .part-text {
-            width: 100%;
-            border-right: none;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .part-details {
-            width: 100%;
-            border-right: none;
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-            /* padding-left: 3.5rem; REMOVED to allow overlay */
-        }
-
-        /* Organizers 2 Cols */
-        .organizers-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .organizer-card {
-            border-bottom: 1px solid #ccc;
-        }
-
-        /* Enforce right border on odd items (overrides desktop 5n rule) */
-        .organizer-card:nth-child(odd) {
-            border-right: 1px solid #ccc;
-        }
-
-        /* Remove right border on even items */
-        .organizer-card:nth-child(2n) {
-            border-right: none;
-        }
-
-        /* Restore bottom border for items 6+ (overriding desktop rule) */
-        .organizer-card:nth-child(n+6) {
-            border-bottom: 1px solid #ccc;
-        }
-
-        /* Remove bottom border for last row (assuming 2 columns) */
-        .organizer-card:nth-last-child(-n+2) {
-            border-bottom: none;
-        }
-
-        /* Labels: Remove overrides to keep them vertical.
-           Ensure container padding matches desktop or adapts 
-        */
-        .section-border {
-            /* padding-left: 3rem; REMOVED to allow overlay */
-        }
-
-        /* Tentative note: Keep matching desktop (vertical) */
-        .tentative-note {
-            /* Inherit desktop styles */
-        }
-
-        .schedule-list {
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
-
     @keyframes bounce-horizontal {
 
         0%,
@@ -958,3 +865,202 @@ footer {
             transform: translateY(5px);
         }
     }
+}
+
+/* CONTRIBUTIONS SECTION */
+.contributions-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2.5rem;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+.contribution-row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: stretch;
+    padding-left: 2rem;
+    transition: background 0.2s;
+}
+
+.contribution-row:last-child {
+    border-bottom: none;
+}
+
+.contribution-row:hover {
+    background: #fafafa;
+}
+
+.contrib-type-col {
+    width: 140px;
+    padding: 1.2rem var(--spacing-md);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #888;
+    flex-shrink: 0;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.contrib-main-col {
+    padding: 1.2rem var(--spacing-lg);
+    flex: 1;
+    max-width: 800px;
+}
+
+.contrib-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+}
+
+.contrib-author {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.contrib-author-pending {
+    color: #aaa;
+    font-style: italic;
+}
+
+.contrib-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #555;
+    margin-bottom: 0.8rem;
+}
+
+.contrib-desc-pending {
+    color: #bbb;
+    font-style: italic;
+}
+
+.contrib-pdf-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #000;
+    text-decoration: underline;
+    text-decoration-color: #ccc;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+}
+
+.contrib-pdf-link:hover {
+    text-decoration-color: #000;
+}
+
+.contrib-pdf-pending {
+    color: #bbb;
+    text-decoration: none;
+    cursor: default;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    body {
+        width: 100%;
+        margin: 0;
+        border: none;
+    }
+
+    .atlas-hero {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+    }
+
+    .hero-left-split,
+    .hero-right-split {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        min-height: 400px;
+    }
+
+    .atlas-overlay {
+        top: 25%;
+        left: 52%;
+        width: 80%;
+    }
+
+    .participation-container {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .part-text {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .part-details {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+    }
+
+    .organizers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .organizer-card {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .organizer-card:nth-child(odd) {
+        border-right: 1px solid #ccc;
+    }
+
+    .organizer-card:nth-child(2n) {
+        border-right: none;
+    }
+
+    .organizer-card:nth-child(n+6) {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .organizer-card:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+
+    .schedule-list {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .contributions-list {
+        padding-left: 0;
+    }
+
+    .contribution-row {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .contrib-type-col {
+        width: auto;
+        border-right: none;
+        padding: 1rem 2rem 0 2rem;
+    }
+
+    .contrib-main-col {
+        padding: 0.5rem 2rem 1.2rem 2rem;
+        max-width: none;
+    }
+}
